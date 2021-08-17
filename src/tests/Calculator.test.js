@@ -83,6 +83,7 @@ describe('Calculator', () => {
     expect(runningTotal.text()).toEqual('127');
   })
 
+  // this test fails, the calculator cannot do this function
   it('should chain multiple operations together', () => {
     const button3 = container.find('#number3');
     const multiplyButton = container.find('#operator-multiply');
