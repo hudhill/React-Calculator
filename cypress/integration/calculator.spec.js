@@ -21,6 +21,7 @@ describe("Calculator", () => {
     cy.get('.display').should('contain', '5')
   })
 
+  //this test fails. the application does not allow this operation
   it('should allow multiple operations to be chained together', () => {
     cy.get('#number2').click();
     cy.get('#operator-add').click();
@@ -31,16 +32,38 @@ describe("Calculator", () => {
     cy.get('#running-total').should('contain', '4')
   })
 
-  it('should display expected output for a range of numbers', () => {
+  it('should display expected output for positive number', () => {
+    cy.get('#number3').click();
+    cy.get('.display').should('contain', '3');
+  })
+
+  it('should display expected output for negative number', () => {
     cy.get('#number3').click();
     cy.get('#operator-subtract').click();
     cy.get('#number6').click();
     cy.get('#operator-equals').click();
     cy.get('.display').should('contain', '-3');
-    cy.get('#operator-divide').click();
-    cy.get('#number7').click();
-    cy.get('#operator-equals').click();
-    cy.get('.display').should('contain', '-0.42857142857142855')
+  })
+
+  it('should display expected output for decimal', () => {
+    cy.get('#number3').click();
+    cy.get('#decimal').click();
+    cy.get('#number3').click();
+    cy.get('.display').should('contain', '3.3');
+  })
+
+  it('should display expected output for very large numbers', () => {
+    cy.get('#number9').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#operator-multiply').click();
+    cy.get('.display').should('contain', '3.043252722170454e+52')
   })
 
   it('should return Infinity when value is divided by zero', () => {
